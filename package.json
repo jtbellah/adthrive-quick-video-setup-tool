@@ -1,6 +1,5 @@
 {
   "name": "adthrive-video-setup-tool-v2",
-  "homepage": "https://jtbellah.github.io/adthrive-video-setup-tool-v2",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
