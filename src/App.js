@@ -69,7 +69,8 @@ function App() {
         name: `${siteName} - Collapsible`,
         responsive: "true",
         repeat: "none",
-        preload: "none"
+        preload: "none",
+        displaydescription: "false"
       })
       .then(res => setCollapsibleID(res.player.key));
   }
