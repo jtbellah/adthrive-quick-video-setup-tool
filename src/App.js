@@ -11,6 +11,7 @@ function App() {
   const [inPostID, setInPostID] = useState("");
   const [collapsibleID, setCollapsibleID] = useState("");
 
+  // handle form submission
   async function handleForm() {
     // proxy url
     const proxyUrl = "https://cors-anywhere.herokuapp.com/";
