@@ -4,7 +4,7 @@ This tool allows you to quickly complete the initial video setup for our publish
 
 ## Usage
 
-This guide assumes you know how to create new properties in the JW Player dashboard.
+***NOTE:*** This guide assumes you know how to create new properties in the JW Player dashboard.
 
 **1.** Log in to the [JW Player Dashboard](https://dashboard.jwplayer.com/#/welcome "JW Player Dashboard") and create a new property for the site that is being setup with video.
 
