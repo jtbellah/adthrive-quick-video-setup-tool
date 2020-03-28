@@ -1,3 +1,28 @@
+# AdThrive Quick Video Setup Tool ⚡️ (v2.0)
+
+This tool allows you to quickly complete the initial video setup for our publishers (*yay!* 🎉).
+
+## Usage
+
+This guide assumes you know how to create new properties in the JW Player dashboard.
+
+1. Log in to the [JW Player Dashboard](https://dashboard.jwplayer.com/#/welcome "JW Player Dashboard") and create a new property for the site that is being setup with video.
+
+2. Click the menu button in the upper right-hand corner of the page (the cog just to the right of your email address) and select **"API Credentials"** from the dropdown menu.
+
+3. Locate the property you just created and click **"Show Credentials"** to display the API Key and API Secret (you'll need these in a moment).
+
+4. Open the [AdThrive Quick Video Setup Tool](https://focused-blackwell-01563a.netlify.com/ "AdThrive Quick Video Setup Tool") in a new browser tab.
+
+5. Enter the site's name in the "Site Name" field and then copy/paste the API Key and API Secret into their respective fields.
+
+6. Click the submit button and watch the tool work its magic ✨.
+
+7. Copy/paste the data that appears on the right (it will appear as pink text) into the appropriate fields in the internal portal.
+
+
+# Additional Information
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
