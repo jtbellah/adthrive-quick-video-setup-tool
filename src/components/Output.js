@@ -13,12 +13,12 @@ function Output(props) {
           <code>{props.apiSecret ? props.apiSecret : ""}</code>
         </li>
         <li className="list-group-item">
-          <strong>Playlist ID:</strong>&nbsp;
-          <code>{props.playlistID ? props.playlistID : ""}</code>
-        </li>
-        <li className="list-group-item">
           <strong>In-Post Player ID:</strong>&nbsp;
           <code>{props.inPostID ? props.inPostID : ""}</code>
+        </li>
+        <li className="list-group-item">
+          <strong>Playlist ID:</strong>&nbsp;
+          <code>{props.playlistID ? props.playlistID : ""}</code>
         </li>
         <li className="list-group-item">
           <strong>Collapsible Player ID:</strong>&nbsp;
