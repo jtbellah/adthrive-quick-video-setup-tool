@@ -1,10 +1,10 @@
-# AdThrive Quick Video Setup Tool ⚡️ (v2.0)
+# AdThrive Quick Video Setup Tool ⚡️
 
-This tool allows you to quickly complete the initial video setup for our publishers (*yay!* 🎉).
+This tool allows you to quickly complete the initial video setup for our publishers (_yay!_ 🎉).
 
 ## Usage
 
-***NOTE:*** This guide assumes you know how to create new properties in the JW Player dashboard.
+**_NOTE:_** This guide assumes you know how to create new properties in the JW Player dashboard.
 
 **1.** Log in to the [JW Player Dashboard](https://dashboard.jwplayer.com/#/welcome "JW Player Dashboard") and create a new property for the site that is being setup with video.
 
@@ -19,7 +19,6 @@ This tool allows you to quickly complete the initial video setup for our publish
 **6.** Click the submit button and watch the tool work its magic ✨.
 
 **7.** Copy/paste the data that appears on the right (it will appear as pink text) into the appropriate fields in the internal portal.
-
 
 # Additional Information
 
