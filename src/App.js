@@ -60,6 +60,7 @@ function App() {
         sharing: "screen",
         sharing_heading: "Share My Videos!",
         sharing_sites: '["facebook", "twitter", "email", "pinterest"]',
+        displaytitle: "true",
         related_videos: "show"
       })
       .then(res => setInPostID(res.player.key));
