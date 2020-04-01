@@ -97,7 +97,7 @@ function App() {
             &nbsp;⚡️
           </span>
         </h1>
-        <p className="figure-caption text-center">v2.0.1</p>
+        <p className="figure-caption text-center">v2.0.2</p>
       </header>
 
       {/* form & output display */}
