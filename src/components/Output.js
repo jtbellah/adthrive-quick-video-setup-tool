@@ -1,32 +1,56 @@
-import React from "react";
+import React from 'react';
 
-function Output(props) {
+const Output = props => {
+  const {
+    apiKey,
+    apiSecret,
+    inPostID,
+    playlistID,
+    collapsibleID,
+    importTotal,
+    importing,
+  } = props;
+
   return (
     <ul className="list-group col-6">
       <div id="outputCard" className="card-body">
         <li className="list-group-item">
           <strong>API Key:</strong>&nbsp;
-          <code>{props.apiKey ? props.apiKey : ""}</code>
+          <code>{apiKey || ''}</code>
         </li>
         <li className="list-group-item">
           <strong>API Secret:</strong>&nbsp;
-          <code>{props.apiSecret ? props.apiSecret : ""}</code>
+          <code>{apiSecret || ''}</code>
         </li>
         <li className="list-group-item">
           <strong>In-Post Player ID:</strong>&nbsp;
-          <code>{props.inPostID ? props.inPostID : ""}</code>
+          <code>{inPostID || ''}</code>
         </li>
         <li className="list-group-item">
           <strong>Playlist ID:</strong>&nbsp;
-          <code>{props.playlistID ? props.playlistID : ""}</code>
+          <code>{playlistID || ''}</code>
         </li>
         <li className="list-group-item">
           <strong>Collapsible Player ID:</strong>&nbsp;
-          <code>{props.collapsibleID ? props.collapsibleID : ""}</code>
+          <code>{collapsibleID || ''}</code>
+        </li>
+        <li className="list-group-item">
+          {importing ? (
+            <>
+              <div
+                className="spinner-border spinner-border-sm text-success"
+                role="status"
+              ></div>
+              <strong>&nbsp;Importing...</strong>
+            </>
+          ) : (
+            <strong>Total Videos Imported:</strong>
+          )}
+          {importTotal && <div>🎉 {importTotal} videos imported</div>}
         </li>
       </div>
     </ul>
   );
-}
+};
 
 export default Output;

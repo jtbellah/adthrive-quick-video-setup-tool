@@ -1,67 +1,118 @@
-import React, { useState } from "react";
-import Form from "./components/Form";
-import Output from "./components/Output";
+/* eslint-disable no-shadow */
+import React, { useState } from 'react';
+import JWPlatformAPI from 'jwplatform';
+import Form from './components/Form';
+import Output from './components/Output';
+
+import sitemapFetch from './lib/import/sitemapFetch';
 
 function App() {
   // state vars
-  const [siteName, setSiteName] = useState("");
-  const [apiKey, setApiKey] = useState("");
-  const [apiSecret, setApiSecret] = useState("");
-  const [playlistID, setPlaylistID] = useState("");
-  const [inPostID, setInPostID] = useState("");
-  const [collapsibleID, setCollapsibleID] = useState("");
+  const [siteName, setSiteName] = useState('');
+  const [apiKey, setApiKey] = useState('');
+  const [apiSecret, setApiSecret] = useState('');
+  const [playlistID, setPlaylistID] = useState('');
+  const [inPostID, setInPostID] = useState('');
+  const [collapsibleID, setCollapsibleID] = useState('');
+  const [sitemapUrl, setSitemapUrl] = useState('');
+  const [importTotal, setImportTotal] = useState('');
+  const [error, setError] = useState(false);
+  const [importing, setImporting] = useState(false);
+  const [playersExist, setPlayersExist] = useState(false);
+  const [playlistsExist, setPlaylistsExist] = useState(false);
+  const [videosExist, setVideosExist] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // handle form submission
   async function handleForm() {
-    // proxy url
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    setLoading(true);
 
-    // get jw api
-    const JWPlatformAPI = require("jwplatform");
+    // proxy url
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 
     // create new api instance
     const jwApiInstance = new JWPlatformAPI({
-      apiKey: apiKey,
-      apiSecret: apiSecret
+      apiKey,
+      apiSecret,
     });
 
     // update api url
-    jwApiInstance._client.baseUrl = proxyUrl + "https://api.jwplatform.com/v1/";
+    jwApiInstance._client.baseUrl = `${proxyUrl}https://api.jwplatform.com/v1/`;
+
+    // check for existing objects
+    const existingPlayers = await jwApiInstance.players
+      .list()
+      .then(res => res.players.length > 0);
+
+    const existingPlaylists = await jwApiInstance.channels
+      .list()
+      .then(res => res.channels.length > 0);
+
+    const existingVideos = await jwApiInstance.videos
+      .list()
+      .then(res => res.videos.length > 0);
+
+    if (existingPlayers || existingPlaylists || existingVideos) {
+      if (existingPlayers) {
+        setPlayersExist(true);
+      }
+
+      if (existingPlaylists) {
+        setPlaylistsExist(true);
+      }
+
+      if (existingVideos) {
+        setVideosExist(true);
+      }
+
+      setLoading(false);
+
+      return console.warn('⚠️ Aborted due to existing objects');
+    }
+
+    // start video import
+    if (sitemapUrl) {
+      sitemapFetch(
+        jwApiInstance,
+        sitemapUrl,
+        setError,
+        setImportTotal,
+        setImporting
+      );
+    }
 
     // create playlist
     await jwApiInstance.channels
       .create({
-        type: "dynamic",
-        title: "Sidebar",
-        description: `${siteName}'s Videos.`
+        type: 'dynamic',
+        title: 'Sidebar',
+        description: `${siteName}'s Videos.`,
       })
       .then(res => {
         setPlaylistID(res.channel.key);
         // update playlist
         // note: it doesn't look like the jw api supports adding these props when creating playlists, so you have to update the playlist directly to get them added.
-        jwApiInstance.channels
-          .update({
-            channel_key: res.channel.key,
-            tags: "Sidebar",
-            tags_mode: "any",
-            sort_order: "views-asc",
-            videos_max: 30
-          })
-          .then(res => console.log(res));
+        jwApiInstance.channels.update({
+          channel_key: res.channel.key,
+          tags: 'Sidebar',
+          tags_mode: 'any',
+          sort_order: 'views-asc',
+          videos_max: 30,
+        });
       });
 
     // create in-post player
     await jwApiInstance.players
       .create({
         name: `${siteName} - In Post`,
-        responsive: "true",
-        repeat: "none",
-        preload: "none",
-        sharing: "screen",
-        sharing_heading: "Share My Videos!",
+        responsive: 'true',
+        repeat: 'none',
+        preload: 'none',
+        sharing: 'screen',
+        sharing_heading: 'Share My Videos!',
         sharing_sites: '["facebook", "twitter", "email", "pinterest"]',
-        displaytitle: "true",
-        related_videos: "show"
+        displaytitle: 'true',
+        related_videos: 'show',
       })
       .then(res => setInPostID(res.player.key));
 
@@ -69,22 +120,27 @@ function App() {
     await jwApiInstance.players
       .create({
         name: `${siteName} - Collapsible`,
-        responsive: "true",
-        repeat: "none",
-        preload: "none",
-        displaydescription: "false"
+        responsive: 'true',
+        repeat: 'none',
+        preload: 'none',
+        displaydescription: 'false',
       })
       .then(res => setCollapsibleID(res.player.key));
+
+    setLoading(false);
   }
 
   function handleFormReset() {
     // clear state
-    setSiteName("");
-    setApiKey("");
-    setApiSecret("");
-    setPlaylistID("");
-    setInPostID("");
-    setCollapsibleID("");
+    setSiteName('');
+    setApiKey('');
+    setApiSecret('');
+    setPlaylistID('');
+    setInPostID('');
+    setCollapsibleID('');
+    setSitemapUrl('');
+    setImportTotal('');
+    setError(false);
   }
 
   return (
@@ -97,7 +153,7 @@ function App() {
             &nbsp;⚡️
           </span>
         </h1>
-        <p className="figure-caption text-center">v2.0.2</p>
+        <p className="figure-caption text-center">v2.1</p>
       </header>
 
       {/* form & output display */}
@@ -112,6 +168,13 @@ function App() {
             setApiSecret={setApiSecret}
             handleForm={handleForm}
             handleFormReset={handleFormReset}
+            sitemapUrl={sitemapUrl}
+            setSitemapUrl={setSitemapUrl}
+            error={error}
+            playersExist={playersExist}
+            playlistsExist={playlistsExist}
+            videosExist={videosExist}
+            loading={loading}
           />
           <div className="col-1"></div>
           <Output
@@ -120,6 +183,8 @@ function App() {
             playlistID={playlistID}
             inPostID={inPostID}
             collapsibleID={collapsibleID}
+            importTotal={importTotal}
+            importing={importing}
           />
         </div>
       </div>
