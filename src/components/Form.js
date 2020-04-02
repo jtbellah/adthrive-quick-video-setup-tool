@@ -113,7 +113,9 @@ function Form(props) {
           placeholder="Sitemap Url"
         ></input>
         {error && (
-          <div className="alert alert-danger mt-1">❗Response or XML Error</div>
+          <div className="alert alert-danger mt-1">
+            ❗There was an error with the sitemap URL
+          </div>
         )}
       </div>
 
@@ -124,7 +126,7 @@ function Form(props) {
           type="button"
           className="btn btn-primary mt-3"
           onClick={handleForm}
-          // disabled={!siteName || !apiKey || !apiSecret}
+          disabled={!siteName || !apiKey || !apiSecret}
         >
           Submit
         </button>

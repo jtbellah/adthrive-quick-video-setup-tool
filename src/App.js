@@ -39,7 +39,9 @@ function App() {
     // update api url
     jwApiInstance._client.baseUrl = `${proxyUrl}https://api.jwplatform.com/v1/`;
 
-    // check for existing objects
+
+    // get existing objects
+
     const existingPlayers = await jwApiInstance.players
       .list()
       .then(res => res.players.length > 0);
@@ -52,7 +54,26 @@ function App() {
       .list()
       .then(res => res.videos.length > 0);
 
-    if (existingPlayers || existingPlaylists || existingVideos) {
+
+    // check if videos exist
+    if (sitemapUrl && existingVideos) {
+      setVideosExist(true);
+    }
+
+    // if sitemap url is added and no videos exist, start video import
+    if (sitemapUrl && !existingVideos) {
+      sitemapFetch(
+        jwApiInstance,
+        sitemapUrl,
+        setError,
+        setImportTotal,
+        setImporting
+      );
+    }
+
+    // check if players and playlists exist
+    if (existingPlayers || existingPlaylists) {
+
       if (existingPlayers) {
         setPlayersExist(true);
       }
@@ -60,6 +81,11 @@ function App() {
       if (existingPlaylists) {
         setPlaylistsExist(true);
       }
+
+
+      // we can return here to prevent players and playlists from being setup
+      return console.warn(
+        '⚠️ Aborted player and playlist setup due to existing objects'
 
       if (existingVideos) {
         setVideosExist(true);
