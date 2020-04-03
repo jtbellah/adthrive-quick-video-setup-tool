@@ -40,14 +40,15 @@ function App() {
     jwApiInstance._client.baseUrl = `${proxyUrl}https://api.jwplatform.com/v1/`;
 
     // get existing objects
-
     const existingPlayers = await jwApiInstance.players
       .list()
-      .then(res => res.players.length > 0);
+      .then(res => 
+         res.players.find(player => player.name.includes('In Post') || player.name.includes('Collapsible'))
+      );
 
     const existingPlaylists = await jwApiInstance.channels
       .list()
-      .then(res => res.channels.length > 0);
+      .then(res => res.channels.find(channel => channel.title === 'Sidebar'));
 
     const existingVideos = await jwApiInstance.videos
       .list()
@@ -68,6 +69,7 @@ function App() {
         setImporting
       );
     }
+    
 
     // check if players and playlists exist
     if (existingPlayers || existingPlaylists) {
@@ -147,6 +149,9 @@ function App() {
     setSitemapUrl('');
     setImportTotal('');
     setError(false);
+    setPlayersExist(false);
+    setPlaylistsExist(false);
+    setVideosExist(false);
   }
 
   return (

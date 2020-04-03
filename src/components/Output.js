@@ -41,7 +41,7 @@ const Output = props => {
                 className="spinner-border spinner-border-sm text-success"
                 role="status"
               ></div>
-              <strong>&nbsp;Importing...</strong>
+              <strong>&nbsp;Importing...<br />This may take a few minutes. Please leave the window open.</strong>
             </>
           ) : (
             <strong>Total Videos Imported:</strong>
