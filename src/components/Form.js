@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
-import React from 'react';
+import React from "react";
 
 function Form(props) {
   const {
@@ -27,7 +27,7 @@ function Form(props) {
         <div className="d-flex justify-content-center">
           <div
             className="spinner-border text-primary"
-            style={{ width: '3rem', height: '3rem' }}
+            style={{ width: "3rem", height: "3rem" }}
             role="status"
           >
             <span className="sr-only">Loading...</span>
@@ -42,17 +42,26 @@ function Form(props) {
       {/* site name field */}
       {playersExist && (
         <div className="alert alert-warning">
-          ⚠️ Players for this property already exist.
+          <span role="img" aria-label="Warning">
+            ⚠️
+          </span>{" "}
+          Players for this property already exist.
         </div>
       )}
       {playlistsExist && (
         <div className="alert alert-warning">
-          ⚠️ Playlists for this property already exist.
+          <span role="img" aria-label="Warning">
+            ⚠️
+          </span>{" "}
+          Playlists for this property already exist.
         </div>
       )}
       {videosExist && (
         <div className="alert alert-warning">
-          ⚠️ Videos for this property already exist.
+          <span role="img" aria-label="Warning">
+            ⚠️
+          </span>{" "}
+          Videos for this property already exist.
         </div>
       )}
       <div className="form-group">
@@ -64,7 +73,7 @@ function Form(props) {
           className="form-control"
           id="siteNameInput"
           value={siteName}
-          onChange={e => setSiteName(e.target.value)}
+          onChange={(e) => setSiteName(e.target.value)}
           placeholder="Site Name"
         ></input>
       </div>
@@ -79,7 +88,7 @@ function Form(props) {
           className="form-control"
           id="apiKeyInput"
           value={apiKey}
-          onChange={e => setApiKey(e.target.value)}
+          onChange={(e) => setApiKey(e.target.value)}
           placeholder="API Key"
         ></input>
       </div>
@@ -94,7 +103,7 @@ function Form(props) {
           className="form-control"
           id="apiSecretInput"
           value={apiSecret}
-          onChange={e => setApiSecret(e.target.value)}
+          onChange={(e) => setApiSecret(e.target.value)}
           placeholder="API Secret"
         ></input>
       </div>
@@ -109,12 +118,15 @@ function Form(props) {
           className="form-control"
           id="sitemapUrlInput"
           value={sitemapUrl}
-          onChange={e => setSitemapUrl(e.target.value)}
+          onChange={(e) => setSitemapUrl(e.target.value)}
           placeholder="Sitemap Url"
         ></input>
         {error && (
           <div className="alert alert-danger mt-1">
-            ❗There was an error with the sitemap URL
+            <span role="img" aria-label="Warning">
+              ❗
+            </span>{" "}
+            There was an error with the sitemap URL
           </div>
         )}
       </div>

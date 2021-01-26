@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const Output = props => {
+const Output = (props) => {
   const {
     apiKey,
     apiSecret,
@@ -16,23 +16,23 @@ const Output = props => {
       <div id="outputCard" className="card-body">
         <li className="list-group-item">
           <strong>API Key:</strong>&nbsp;
-          <code>{apiKey || ''}</code>
+          <code>{apiKey || ""}</code>
         </li>
         <li className="list-group-item">
           <strong>API Secret:</strong>&nbsp;
-          <code>{apiSecret || ''}</code>
+          <code>{apiSecret || ""}</code>
         </li>
         <li className="list-group-item">
           <strong>In-Post Player ID:</strong>&nbsp;
-          <code>{inPostID || ''}</code>
+          <code>{inPostID || ""}</code>
         </li>
         <li className="list-group-item">
           <strong>Playlist ID:</strong>&nbsp;
-          <code>{playlistID || ''}</code>
+          <code>{playlistID || ""}</code>
         </li>
         <li className="list-group-item">
           <strong>Collapsible Player ID:</strong>&nbsp;
-          <code>{collapsibleID || ''}</code>
+          <code>{collapsibleID || ""}</code>
         </li>
         <li className="list-group-item">
           {importing ? (
@@ -41,12 +41,23 @@ const Output = props => {
                 className="spinner-border spinner-border-sm text-success"
                 role="status"
               ></div>
-              <strong>&nbsp;Importing...<br />This may take a few minutes. Please leave the window open.</strong>
+              <strong>
+                &nbsp;Importing...
+                <br />
+                This may take a few minutes. Please leave the window open.
+              </strong>
             </>
           ) : (
             <strong>Total Videos Imported:</strong>
           )}
-          {importTotal && <div>🎉 {importTotal} videos imported</div>}
+          {importTotal && (
+            <div>
+              <span role="img" aria-label="Warning">
+                🎉
+              </span>{" "}
+              {importTotal} videos imported
+            </div>
+          )}
         </li>
       </div>
     </ul>
